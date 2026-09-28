@@ -1,0 +1,82 @@
+/* Reset basique */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.mainHeader h1 {
+    text-align: center;
+    font-size: 35px;
+    letter-spacing: 1px;
+}
+
+.searchForm {
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.formGroup input,
+.formGroup select {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 8px;
+}
+
+.buttonGroup button {
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.resultsContainer {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.animeCard {
+    width: 100%;
+    max-width: 450px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.animeCard img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 2px;
+}
