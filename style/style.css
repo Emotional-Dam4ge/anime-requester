@@ -1,3 +1,36 @@
+/* Thème clair par défaut */
+:root {
+    color-scheme: light;
+    --page-bg: #f4f7fb;
+    --surface: #ffffff;
+    --surface-muted: #f8fafc;
+    --text: #172033;
+    --text-muted: #536176;
+    --border: #cbd5e1;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --button-secondary: #e8edf5;
+    --button-secondary-hover: #dce4ef;
+    --focus: #60a5fa;
+    --shadow: 0 8px 24px rgb(15 23 42 / 8%);
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --page-bg: #111827;
+    --surface: #1f2937;
+    --surface-muted: #273449;
+    --text: #f3f4f6;
+    --text-muted: #c0cad8;
+    --border: #475569;
+    --accent: #60a5fa;
+    --accent-hover: #93c5fd;
+    --button-secondary: #374151;
+    --button-secondary-hover: #4b5563;
+    --focus: #93c5fd;
+    --shadow: 0 8px 24px rgb(0 0 0 / 24%);
+}
+
 /* Reset basique */
 * {
     box-sizing: border-box;
@@ -7,40 +40,105 @@
 
 body {
     font-family: Arial, sans-serif;
-    padding: 30px;
+    min-height: 100vh;
+    padding: 30px clamp(16px, 4vw, 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    color: var(--text);
+    background: var(--page-bg);
+    transition: color 180ms ease, background-color 180ms ease;
+}
+
+.mainHeader,
+.mainContainer {
+    width: 100%;
+    max-width: 1100px;
+}
+
+.mainContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 25px;
 }
 
+.headerContent {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+}
+
 .mainHeader h1 {
     text-align: center;
-    font-size: 35px;
+    font-size: clamp(25px, 4vw, 35px);
     letter-spacing: 1px;
+}
+
+.themeControls {
+    justify-self: end;
+    display: flex;
+    gap: 8px;
+}
+
+.themeButton {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    background: var(--surface);
+    font-size: 21px;
+    cursor: pointer;
+    transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.themeButton:hover {
+    background: var(--surface-muted);
+    transform: translateY(-1px);
+}
+
+.themeButton[aria-pressed="true"] {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
 .searchForm {
     width: 100%;
     max-width: 500px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
 }
 
 .formGroup {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
+    color: var(--text-muted);
 }
 
 .formGroup input,
 .formGroup select {
     padding: 10px;
     font-size: 16px;
+    color: var(--text);
+    background: var(--surface-muted);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+
+.formGroup input::placeholder {
+    color: var(--text-muted);
 }
 
 .buttonGroup {
@@ -50,9 +148,29 @@ body {
 
 .buttonGroup button {
     flex: 1;
-    padding: 8px;
+    padding: 10px 14px;
     font-size: 16px;
     cursor: pointer;
+    color: var(--text);
+    background: var(--button-secondary);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.buttonGroup button:hover {
+    background: var(--button-secondary-hover);
+}
+
+.buttonGroup #submitBtn {
+    color: #ffffff;
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.buttonGroup #submitBtn:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
 }
 
 .resultsContainer {
@@ -67,16 +185,58 @@ body {
 .animeCard {
     width: 100%;
     max-width: 450px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border);
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
+    color: var(--text);
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
 }
 
 .animeCard img {
     max-width: 100%;
     height: auto;
     border-radius: 2px;
+}
+
+:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+    body {
+        padding-top: 20px;
+    }
+
+    .headerContent {
+        grid-template-columns: 1fr auto;
+    }
+
+    .headerSpacer {
+        display: none;
+    }
+
+    .mainHeader h1 {
+        grid-column: 1;
+        grid-row: 1;
+        text-align: left;
+    }
+
+    .themeControls {
+        grid-column: 2;
+        grid-row: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+    }
 }
