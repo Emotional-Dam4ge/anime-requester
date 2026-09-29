@@ -3,6 +3,7 @@
 Application web permettant de rechercher des animes via l'API **AnimeDB** 
 
 🔗 **Lien GitHub Pages :** https://github.com/Emotional-Dam4ge/anime-requester
+**Lien GitHub Project :** https://github.com/users/Emotional-Dam4ge/projects/4
 
 
 ## Membres du groupe
