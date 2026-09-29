@@ -31,7 +31,7 @@ const dropDownMenuFilter = Document.getElementById("searchType");
 
 const formField = Document.getElementById("formulaire");
 //à compléter
-const Boutonrequest = Document.getElementById("");
+const Boutonrequest = Document.getElementById("submitBtn");
 
 Boutonrequest.addListener( 'click', () =>{
     if (dropDownMenuFilter === 'Name'){
