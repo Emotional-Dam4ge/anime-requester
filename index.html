@@ -11,7 +11,32 @@
 <body>
 
     <header class="mainHeader">
-        <h1>ANIME REQUESTER</h1>
+        <div class="headerContent">
+            <span class="headerSpacer" aria-hidden="true"></span>
+            <h1>ANIME REQUESTER</h1>
+
+            <div class="themeControls" role="group" aria-label="Choisir le thème">
+                <button
+                    type="button"
+                    class="themeButton"
+                    id="lightThemeButton"
+                    aria-label="Activer le thème clair"
+                    aria-pressed="true"
+                    title="Thème clair">
+                    <span aria-hidden="true">☀️</span>
+                </button>
+
+                <button
+                    type="button"
+                    class="themeButton"
+                    id="darkThemeButton"
+                    aria-label="Activer le thème sombre"
+                    aria-pressed="false"
+                    title="Thème sombre">
+                    <span aria-hidden="true">🌙</span>
+                </button>
+            </div>
+        </div>
     </header>
 
     <main class="mainContainer">
@@ -27,7 +52,12 @@
 
             <div class="formGroup">
                 <label for="searchParam">Paramètre :</label>
-                <input type="text" id="searchParam" name="searchParam" required autocomplete="off">
+                <input
+                    type="text"
+                    id="searchParam"
+                    name="searchParam"
+                    required
+                    autocomplete="off">
             </div>
 
             <div class="buttonGroup">
@@ -37,9 +67,44 @@
         </form>
 
         <section id="resultsContainer" class="resultsContainer" aria-live="polite">
-            <!-- Met les injection de cartes JS là -->
+            <!-- Les cartes des animes seront ajoutées ici par JavaScript -->
         </section>
     </main>
+
+    <script>
+        (() => {
+            const lightButton = document.getElementById("lightThemeButton");
+            const darkButton = document.getElementById("darkThemeButton");
+            const storageKey = "anime-requester-theme";
+
+            function setTheme(theme) {
+                const isDark = theme === "dark";
+
+                document.documentElement.dataset.theme = isDark ? "dark" : "light";
+                lightButton.setAttribute("aria-pressed", String(!isDark));
+                darkButton.setAttribute("aria-pressed", String(isDark));
+
+                try {
+                    localStorage.setItem(storageKey, isDark ? "dark" : "light");
+                } catch (error) {
+                    // Le thème fonctionne aussi si le navigateur bloque le stockage local.
+                }
+            }
+
+            let savedTheme = null;
+
+            try {
+                savedTheme = localStorage.getItem(storageKey);
+            } catch (error) {
+                // Le mode clair est utilisé si le stockage local est inaccessible.
+            }
+
+            setTheme(savedTheme === "dark" ? "dark" : "light");
+
+            lightButton.addEventListener("click", () => setTheme("light"));
+            darkButton.addEventListener("click", () => setTheme("dark"));
+        })();
+    </script>
 
     <script type="module" src="/script.js"></script>
 </body>
