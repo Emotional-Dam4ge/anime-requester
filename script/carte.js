@@ -107,7 +107,12 @@ async function searchByName(){
 }
 
 function searchById(){
+    section.innerHTML = "";
     const animeJson = getAnimeById(formField.value);
+
+    carte = getCarte(animeJson.data[0])
+
+    section.append(getCarte())
 }
 
 function searchByRanking(){
