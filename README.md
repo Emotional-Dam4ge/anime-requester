@@ -19,17 +19,17 @@ Application web permettant de rechercher des animes via l'API **AnimeDB**
   * Nom (jusqu'à 10 résultats)
   * Identifiant (1 résultat)
   * Classement (1 résultat)
-* Affichage des cartes avec titre, image, synopsis, genres, classement et nombre d'épisodes[cite: 4].
-* Boutons pour lancer la recherche et effacer le formulaire[cite: 4].
-
+* Affichage des cartes avec titre, image, synopsis, genres, classement et nombre d'épisodes.
+* Boutons pour lancer la recherche et effacer le formulaire.
 
 ## Lancement local
 
-Comme le projet utilise des modules JavaScript, il faut le lancer avec un serveur local
+Le projet utilisant des modules JavaScript, il doit être exécuté via un serveur local HTTP :
 
-1. Cloner le projet :
+1. Cloner le dépôt :
    git clone https://github.com/Emotional-Dam4ge/anime-requester
 
-2. Ouvrir le dossier dans VS Code.
-
-3. Faire un clic droit sur index.html puis cliquer sur "Open with Live Server".
+2. Lancer un serveur local (au choix) :
+   - Avec l'extension VS Code "Live Server" (clic droit sur index.html > Open with Live Server)
+   - Avec Python : python -m http.server
+   - Avec Node.js : npx serve
