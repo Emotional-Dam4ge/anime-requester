@@ -130,13 +130,26 @@ async function searchById(){
 }
 
 async function searchByRanking(){
-    const animeJson = getAnimeByRanking(formField.value);
+    section.innerHTML = "";
+    
+    const animeJson = await getAnimeByRanking(formField.value);
+
+    if(animeJson){
+        const carte = getCarte(animeJson);
+        section.append(carte);
+    }else{
+        section.innerHTML = "<p>Aucun anime trouvé pour cet identifiant.</p>"
+    }
 
 
 }
 
 async function searchByGenre(){
-    const animeJson = getAnimeByGenre();
+    section.innerHTML = "";
+
+    const animeJson = await getAnimeByGenre(formField.value);
+
+    
 }
 
 
