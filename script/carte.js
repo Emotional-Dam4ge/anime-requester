@@ -60,32 +60,43 @@ function getCarte( card){
     titreCard.textContent = card.title;
 
     const synopsisCard = document.createElement("p");
-    synopsisCard.textContent = card.synopsis;
+    synopsisCard.textContent = "Synopsis: " + card.synopsis;
 
     const statusCard = document.createElement("p");
-    statusCard.textContent = card.status;
+    statusCard.textContent = "Status: " + card.status;
+    
+    const divGenres = document.createElement("div");
+    const genreText = document.createElement("p");
+    genreText.textContent = "Genres: "
+    divGenres.append(genreText);
+    for (const genre of card.genres){
+        const genreCard = document.createElement("p");
+        genreCard.textContent = genre;
+        divGenres.append(genreCard);
+    }
     
 
     const rankingCard = document.createElement("p");
     if (card.hasRanking ){
-        rankingCard.textContent = card.ranking;
+        rankingCard.textContent = "Classement: "+ card.ranking;
     }else{
-        rankingCard.textContent = "N/A";
+        rankingCard.textContent = "Classement: N/A";
     }
 
     const epNumberCard = document.createElement("p");
     if(card.hasEpisode){
-        epNumberCard.textContent = card.episodes;
+        epNumberCard.textContent = "Nombre d'épisode: "+ card.episodes;
     }else{
-        epNumberCard.textContent = "N/A";
+        epNumberCard.textContent = "Nombre d'épisode: N/A";
     }
 
     //divCard.classList.add("Card");
     //divCard.dataset.value = card;
 
-    divCard.append(titreCard)
+    divCard.append(titreCard);
     divCard.append(imageCard);
     divCard.append(synopsisCard);
+    divCard.append(divGenres);
     divCard.append(statusCard);
     divCard.append(rankingCard);
     divCard.append(epNumberCard); 
@@ -106,22 +117,25 @@ async function searchByName(){
     }
 }
 
-function searchById(){
+async function searchById(){
     section.innerHTML = "";
-    const animeJson = getAnimeById(formField.value);
+    const animeJson = await getAnimeById(formField.value);
 
-    carte = getCarte(animeJson.data[0])
-
-    section.append(getCarte())
+    if( animeJson){
+        const carte = getCarte(animeJson);
+        section.append(carte);
+    }else{
+        section.innerHTML = "<p>Aucun anime trouvé pour cet identifiant.</p>";
+    } 
 }
 
-function searchByRanking(){
+async function searchByRanking(){
     const animeJson = getAnimeByRanking(formField.value);
 
 
 }
 
-function searchByGenre(){
+async function searchByGenre(){
     const animeJson = getAnimeByGenre();
 }
 
